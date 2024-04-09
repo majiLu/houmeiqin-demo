@@ -1,0 +1,24 @@
+.combobox {}
+
+.combobox-input {}
+
+.combobox-clear {}
+
+.combobox-dropdown {}
+
+.combobox-options {
+  background: red;
+  width: auto;
+  list-style-type: none;
+}
+
+.combobox-option {
+  padding: 5px;
+  margin-bottom: 5px;
+  background: green;
+}
+
+.combobox-option:hover {
+  background: blue;
+  cursor: pointer;
+}
