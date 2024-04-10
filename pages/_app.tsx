@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import "@interchain-ui/react/styles";
-
+import { Provider } from "mobx-react";
+import rootStore from "@/store/index";
 import type { AppProps } from "next/app";
 import { SignerOptions, wallets } from "cosmos-kit";
 import { ChainProvider } from "@cosmos-kit/react";
@@ -47,7 +48,9 @@ function CreateCosmosApp({ Component, pageProps }: AppProps) {
           minHeight="100dvh"
           backgroundColor={useColorModeValue("$white", "$background")}
         >
-          <Component {...pageProps} />
+          <Provider {...rootStore}>
+            <Component {...pageProps} />
+          </Provider>
         </Box>
       </ChainProvider>
     </ThemeProvider>

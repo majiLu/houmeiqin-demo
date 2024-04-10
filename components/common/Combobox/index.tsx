@@ -1,26 +1,45 @@
-import { log } from 'console';
-import styles from './combobox.module.css'
-import React, { useState, ChangeEvent } from 'react';
+import styles from "./combobox.module.css";
+import React, { useState, ChangeEvent, useRef, useMemo, ReactNode } from "react";
 
 interface ComboboxProps {
   options: string[];
   onSelect: (option: string) => void;
+  children?:ReactNode
 }
 
-export function Combobox({ options, onSelect }: ComboboxProps) {
-  const [inputValue, setInputValue] = useState('');
+export function Combobox({ options=[], onSelect }: ComboboxProps) {
+  const [inputValue, setInputValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-
+  const dropdownRef = useRef<HTMLUListElement>(null);
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setInputValue(value);
+    const text = event.target.value;
+    setInputValue(text);
   };
 
+  const filteredOptions = useMemo(() => {
+    if (inputValue) {
+      return options.filter((option) =>
+        option.toLowerCase().includes(inputValue.toLowerCase())
+      );
+    }
+    return options;
+  }, [options, inputValue]);
+
   const handleSelectOption = (option: string) => {
-    console.log('handleSelectOption', option)
     setInputValue(option);
     onSelect(option);
     setIsOpen(false);
+  };
+  const handleInputFocus = () => {
+    setIsOpen(true);
+  };
+
+  const handleInputBlur = () => {
+    setTimeout(() => {
+      if (!dropdownRef.current?.contains(document.activeElement)) {
+        setIsOpen(false);
+      }
+    }, 200);
   };
 
   const toggleDropdown = () => {
@@ -28,7 +47,7 @@ export function Combobox({ options, onSelect }: ComboboxProps) {
   };
 
   const handleClearInput = () => {
-    setInputValue('');
+    setInputValue("");
   };
 
   return (
@@ -38,21 +57,21 @@ export function Combobox({ options, onSelect }: ComboboxProps) {
           type="text"
           value={inputValue}
           onChange={handleInputChange}
-          onFocus={toggleDropdown}
-          onBlur={toggleDropdown}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
         />
         {inputValue && (
-          <button className={styles["combobox-clear"]} onClick={handleClearInput}>
-            Clear
-          </button>
+          <span className={styles["combobox-clear"]} onClick={handleClearInput}>
+            x
+          </span>
         )}
-        <button className={styles["combobox-dropdown"]} onClick={toggleDropdown}>
-          {isOpen ? '▲' : '▼'}
-        </button>
+        <span className={styles["combobox-dropdown"]} onClick={toggleDropdown}>
+          {isOpen ? "▲" : "▼"}
+        </span>
       </div>
       {isOpen && (
-        <ul className={styles["combobox-options"]}>
-          {options.map((option) => (
+        <ul ref={dropdownRef} className={styles["combobox-options"]}>
+          {filteredOptions.map((option) => (
             <li
               key={option}
               onClick={() => handleSelectOption(option)}
@@ -65,5 +84,4 @@ export function Combobox({ options, onSelect }: ComboboxProps) {
       )}
     </div>
   );
-};
-
+}

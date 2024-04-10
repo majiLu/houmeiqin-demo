@@ -1,0 +1,152 @@
+.flex-start {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-grow {
+  flex: 1;
+}
+.flex-none {
+  flex: none;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mb-10 {
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 18px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.btn-transfer {
+  background: #464648;
+  color:white;
+}
+.text-ellipsis::before {
+  content: attr(data-start);
+}
+
+.text-ellipsis::after {
+  content: attr(data-end);
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container {
+  color: gray;
+}
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-large {
+  width: 32px;
+  height: 32px;
+}
+
+.right-arrow {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  text-align: center;
+}
+
+.item-label {
+  line-height: 1.5em;
+  font-weight: 500;
+}
+.item-content {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 10px;
+  background: #e9e9fa;
+  border-radius: 5px;
+}
+
+.item-value {
+  padding: 0 4px;
+}
+
+.amount-title {
+  padding: 10px 0;
+  line-height: 1.5em;
+}
+.amount-title label {
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.amount-title .amount-desc span {
+  font-weight: 500;
+}
+.amount-content {
+  border: 1px solid gray;
+  border-radius: 5px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.amount-icon {
+  padding: 6px;
+  border-right: 1px solid gray;
+}
+.amount-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  padding: 0px 5px;
+}
+
+.amount-input-num {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  color: black;
+  padding: 5px;
+  align-items: center;
+  font-weight: 500;
+}
+.amount-input-rate {
+  font-size: 0.8rem;
+}
+
+.amount-percent {
+  text-align: right;
+  margin: 10px 0;
+}
+.amount-percent span {
+  margin: 0 10px;
+  padding: 5px;
+  background: #e9e9fa;
+  border-radius: 3px;
+}
+
+.esitmated-time {
+  font-size: 0.9rem;
+  background: #e9eafb;
+  padding: 10px;
+}
+.esitmated-time label {
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+}
